@@ -1,4 +1,3 @@
-# produtos.py
 from banco import BancoDeDados
 
 class Produto:

@@ -1,4 +1,3 @@
-# banco.py
 import sqlite3
 
 class BancoDeDados:

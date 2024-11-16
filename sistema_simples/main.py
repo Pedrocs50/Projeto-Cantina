@@ -1,4 +1,3 @@
-# main.py
 from produtos import Produto
 from vendas import Venda
 from banco import BancoDeDados
