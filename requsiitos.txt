@@ -1,0 +1,78 @@
+1. SOLID
+Os princípios SOLID são aplicados para melhorar a manutenção e escalabilidade do código. Aqui está como cada um pode ser trabalhado:
+
+S (Single Responsibility Principle - SRP): Cada classe já segue esse princípio, pois possui uma única responsabilidade:
+
+BancoDeDados: Gerencia o banco de dados (conexão, criação de tabelas, etc.).
+Produto: Manipula as operações relacionadas aos produtos.
+Venda: Manipula as operações relacionadas às vendas.
+Melhoria: Mover métodos como criar_tabelas para uma classe específica de inicialização ou configuração do banco.
+O (Open/Closed Principle - OCP): Adicione extensibilidade ao permitir novas funcionalidades sem alterar o código existente.
+
+Melhoria: Para incluir funcionários ou relatórios em Excel, crie classes específicas, como Funcionario ou GeradorRelatorio, que estendam o sistema sem modificar diretamente as classes Produto e Venda.
+L (Liskov Substitution Principle - LSP): Classes derivadas devem substituir suas classes base sem alterar o comportamento esperado.
+
+Melhoria: Implementar herança para criar produtos ou vendas específicos, como VendaFuncionario, para ajustar o comportamento de desconto automático.
+I (Interface Segregation Principle - ISP): Separe responsabilidades para evitar classes com métodos irrelevantes.
+
+Melhoria: Crie interfaces (com classes abstratas) que definem contratos específicos, como uma interface ICadastro para classes que manipulam cadastros (Produto, Funcionario).
+D (Dependency Inversion Principle - DIP): O código deve depender de abstrações, e não de implementações concretas.
+
+Melhoria: Utilize classes abstratas ou interfaces para gerenciar a interação com o banco de dados.
+2. Associação Bilateral
+Associação bilateral ocorre quando duas classes estão diretamente ligadas. No seu projeto, isso é observado em:
+
+Venda tem uma associação com Produto via id_produto no banco de dados.
+Melhoria: Você pode implementar objetos diretamente associados. Exemplo:
+python
+Copiar código
+class Venda:
+    def __init__(self, produto: Produto, quantidade_vendida):
+        self.produto = produto
+        self.quantidade_vendida = quantidade_vendida
+3. Classes Abstratas
+Classes abstratas são úteis para criar contratos gerais para outras classes seguirem.
+
+Melhoria: Crie uma classe abstrata Entidade que define métodos como salvar ou remover, e faça Produto e Funcionario herdarem dela.
+python
+Copiar código
+from abc import ABC, abstractmethod
+
+class Entidade(ABC):
+    @abstractmethod
+    def salvar(self):
+        pass
+    
+    @abstractmethod
+    def remover(self):
+        pass
+4. Interfaces
+As interfaces são conceitos semelhantes às classes abstratas, mas focam em contratos específicos.
+
+Melhoria: Crie interfaces como ICadastro e IGerenciamentoEstoque para estruturar melhor o comportamento das classes.
+5. Herança
+Herança já pode ser usada para criar especializações de classes existentes.
+
+Melhoria: Adicione uma classe Funcionario que herda de uma classe base Pessoa. Ou crie uma especialização de Venda, como VendaFuncionario, que aplica o desconto automático no salário.
+6. Polimorfismo
+O polimorfismo permite que uma classe derivada altere o comportamento de métodos da classe base.
+
+Melhoria: Sobrescreva métodos como realizar_venda para aplicar o desconto automático quando o cliente for um funcionário.
+Extensões Planejadas
+Relatórios para Excel:
+
+Use bibliotecas como pandas ou openpyxl para gerar relatórios diretamente de dados extraídos do banco.
+Banco de Dados para Funcionários:
+
+Crie uma tabela Funcionarios:
+sql
+Copiar código
+CREATE TABLE Funcionarios (
+    id_funcionario INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    saldo_a_pagar REAL DEFAULT 0
+);
+Adicione uma lógica para vincular vendas ao funcionário e atualizar o saldo.
+Seleção de Cliente no Momento da Venda:
+
+Permita escolher se é um funcionário ou cliente comum e aplique as regras específicas para cada um.
