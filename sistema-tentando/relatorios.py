@@ -26,7 +26,7 @@ class GeradorRelatorio:
         df = pd.DataFrame(vendas, columns=["ID Venda", "Produto", "Quantidade", "Data", "Funcionário"])
 
         # Gerar o arquivo Excel com os dados
-        df.to_excel("relatorio_vendas.xlsx", index=False)
+        df.to_excel("relatorio_vendas.xlsx", index=False, sheet_name="Planinha 1")
 
         # Carregar o arquivo Excel com openpyxl para formatação
         workbook = load_workbook("relatorio_vendas.xlsx")
