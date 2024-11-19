@@ -1,5 +1,6 @@
 '''PARA GERAR OS RELATÓRIOS EM EXCEL'''
 
+# import os
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Border, Side, Alignment
@@ -27,6 +28,9 @@ class GeradorRelatorio:
 
         # Gerar o arquivo Excel com os dados
         df.to_excel("relatorio_vendas.xlsx", index=False, sheet_name="Planinha 1")
+
+        # if os.path.exists("relatorio_vendas.xlsx", sheet_name="Planilha 1"):
+        #     df.to_excel("relatorio_vendas2.xlsx", index=False, sheet_name="Planinha 2")
 
         # Carregar o arquivo Excel com openpyxl para formatação
         workbook = load_workbook("relatorio_vendas.xlsx")
