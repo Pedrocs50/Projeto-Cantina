@@ -1,7 +1,7 @@
 '''OPERAÇÕES RELACIONADAS AOS FUNCIONÁRIOS'''
 
 from banco import BancoDeDados
-from entidades import Entidade
+from interface import Entidade
 
 class Funcionario(Entidade):
     def __init__(self, nome):

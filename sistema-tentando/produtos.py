@@ -1,7 +1,7 @@
 '''OPERAÇÕES RELACIONADAS AOS PRODTUSO'''
 
 from banco import BancoDeDados
-from entidades import Entidade
+from interface import Entidade
 
 class Produto(Entidade):
     def __init__(self, nome, preco, quantidade):
